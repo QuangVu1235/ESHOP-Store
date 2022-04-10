@@ -32,5 +32,6 @@ public class UserApi {
 		Users  user = (Users) session.getAttribute(SessionConst.CURRENT_USER) ;
 		Users userrequest = service.updatePassWord(user,chagePass);
 		return userrequest;
+		
 	}
 }
