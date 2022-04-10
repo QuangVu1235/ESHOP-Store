@@ -28,6 +28,7 @@ app.run(function($rootScope, $http) {
 		}
 	};
 
+
 });
 
 app.config(function($routeProvider) {
@@ -61,11 +62,9 @@ app.config(function($routeProvider) {
 
 app.controller("orderCtrl", function($scope, $rootScope, $http) {
 	$scope.dtOptions = {
-		language: $rootScope.datatableVI,
-		responsive: false,
-		pageLength: 4,
-       
-	};
+				pageLength: 4,
+   
+			};
 	$scope.order = {};
 	$http.get("/api/order/all").then(function(response) {
 		$rootScope.orders = response.data;
@@ -178,14 +177,10 @@ app.controller("passwordCtrl", function($scope, $rootScope, $http) {
 
 });
 app.controller("productCtrl", function($scope, $rootScope, $http) {
-	
-	$scope.dtOptions = {
-		language: $rootScope.datatableVI,
-		responsive: false,
-   		scrollY: 450,
-		pageLength: 4,
-       
-	};
+		$scope.dtOptions = {
+				pageLength: 4,
+   
+			};
 	$scope.form = {};
 	$scope.products = {};
 	$('#update').attr('disabled','disabled');
@@ -268,13 +263,7 @@ app.controller("productCtrl", function($scope, $rootScope, $http) {
 				message: 'Cập nhập thông tin thành công',
 			});
 			$scope.loadall();
-			$scope.dtOptions = {
-				language: $rootScope.datatableVI,
-				responsive: false,
-   				scrollY: 450,
-				pageLength: 4,
-       
-			};
+		
 		});	
 
 	};
@@ -366,7 +355,7 @@ app.controller("productCtrl", function($scope, $rootScope, $http) {
 	}
 });
 app.controller("userCtrl", function($scope, $rootScope, $http) {
-	
+		
 	$scope.json = function(){
 		$http.get('/api/currentuser/all').then(function(respone){
 			$scope.users = respone.data;
@@ -378,8 +367,9 @@ app.controller("userCtrl", function($scope, $rootScope, $http) {
 	$scope.json();
 	
 	$scope.update = function(item,value){
+		
 		var isdelete = value;
-		console.log(item);
+	
 		$http.put('/api/currentuser/'+item.id +'/'+ isdelete, item).then(function(data){
 			iziToast.success({
 				title: 'OK',
@@ -393,5 +383,5 @@ app.controller("userCtrl", function($scope, $rootScope, $http) {
 			});
 		})
 	}
-
+		
 });

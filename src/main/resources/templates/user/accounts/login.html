@@ -92,14 +92,20 @@
 	<th:block th:include="user/fragments/header"></th:block>
 
 	<!-- Shop Login -->
+	    
 	<section class="shop login section">
 		<div class="container">
 			<div class="row"> 
 				<div class="col-lg-6 offset-lg-3 col-12">
+				<div th:if="${#request.getParameter('error') == 'true'}"
+         			   style="color:red;margin:10px 0px;">
+        				 Đăng nhập thất bại !!!
+     			 </div>
 					<div class="login-form">
 						<h2>Login</h2>
 						<p>Please register in order to checkout more quickly</p>
 						<!-- Form -->
+						
 						<form  th:action="@{/check/login}" class="form" method="post">
 							<div class="row">
 								<div class="col-12">

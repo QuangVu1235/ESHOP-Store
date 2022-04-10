@@ -30,10 +30,15 @@ public class UserDetailSeriveImpl implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
 		Users appUser = repo.findByUsername(username);
+		
         if (appUser == null) {
             System.out.println("User not found! " + username);
             throw new UsernameNotFoundException("User " + username + " was not found in the database");
         }
+        if(appUser.getIsDeleted() == true) {
+        	System.out.println("Tài khoản đã bị khoá " + username);
+        	throw new UsernameNotFoundException(username+": Tài khoản đã bị khoá");
+		}
         List<Authorities>  autho = authoritiesService.getRoleByUserId(appUser.getId());
         ArrayList<GrantedAuthority> grantList = new ArrayList<GrantedAuthority>();
         for(Authorities auth : autho) {
