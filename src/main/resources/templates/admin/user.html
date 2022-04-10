@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+  <head>
+    <meta charset="utf-8">
+    <title>FShopee</title>
+    <!-- SEO Meta Tags-->
+    <meta name="description" content="Cartzilla - Bootstrap E-commerce Template">
+    <meta name="keywords" content="bootstrap, shop, e-commerce, market, modern, responsive,  business, mobile, bootstrap, html5, css3, js, gallery, slider, touch, creative, clean">
+    <meta name="author" content="Createx Studio">
+    <!-- Viewport-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon and Touch Icons-->
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="mask-icon" color="#fe6a6a" href="safari-pinned-tab.svg">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Vendor Styles including: Font Icons, Plugins, etc.-->
+   	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link
+	href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap"
+	rel="stylesheet">
+    <link rel="stylesheet" media="screen" th:href="@{/admin/vendor/simplebar/dist/simplebar.min.css}"/>
+    <link rel="stylesheet" media="screen" th:href="@{/admin/vendor/tiny-slider/dist/tiny-slider.css}"/>
+    <!-- Main Theme Styles + Bootstrap-->
+    <link rel="stylesheet" media="screen" th:href="@{/admin/css/theme.min.css}">
+    <!-- Google Tag Manager-->
+    <link rel="stylesheet" media="screen" th:href="@{/admin/vendor/prismjs/themes/prism.css}"/>
+    <link rel="stylesheet" media="screen" th:href="@{/admin/vendor/prismjs/plugins/toolbar/prism-toolbar.css}"/>
+    <link rel="stylesheet" media="screen" th:href="@{/admin/vendor/prismjs/plugins/line-numbers/prism-line-numbers.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.css" integrity="sha512-DIW4FkYTOxjCqRt7oS9BFO+nVOwDL4bzukDyDtMO7crjUZhwpyrWBFroq+IqRe6VnJkTpRAS6nhDvf0w+wHmxg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+     <script>
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-WKV3GT5');
+    </script>
+    <script>
+        (function(w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({
+                'gtm.start': new Date().getTime(),
+                event: 'gtm.js'
+            });
+            var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s),
+                dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src =
+                'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-WKV3GT5');
+    </script>
+  </head>
+  <!-- Body-->
+  <body style="font-family: sans-serif;" class="handheld-toolbar-enabled" ng-app="myApp">
+    <!-- Google Tag Manager (noscript)-->
+    <noscript>
+      <iframe src="//www.googletagmanager.com/ns.html?id=GTM-WKV3GT5" height="0" width="0" style="display: none; visibility: hidden;"></iframe>
+    </noscript>
+    <!-- Sign in / sign up modal-->
+    
+    <main class="page-wrapper">
+      <!-- Navbar 3 Level (Light)-->
+     			<th:block th:include="admin/fragments/header"></th:block>
+      <!-- Page Title-->
+      	 		<th:block th:include="admin/fragments/aside"></th:block>
+      	 		<div class="container pb-5 mb-2 mb-md-4">
+        <div class="row">
+          <!-- Sidebar-->
+          <aside class="col-lg-4 pt-4 pt-lg-0 pe-xl-5">
+            <div class="bg-white rounded-3 shadow-lg pt-1 mb-5 mb-lg-0">
+              <div class="d-md-flex justify-content-between align-items-center text-center text-md-start p-4">
+                <div class="d-md-flex align-items-center">
+                  <div class="img-thumbnail rounded-circle position-relative flex-shrink-0 mx-auto mb-2 mx-md-0 mb-md-0" style="width: 6.375rem;"><span class="badge bg-warning position-absolute end-0 mt-n2" data-bs-toggle="tooltip" title="Reward points">384</span><img class="rounded-circle" src="/user/images/{{user.imgUrl}}" alt="Susan Gardner"></div>
+                  <div class="ps-md-3">
+                    <h3 class="fs-base mb-0">{{user.fullname}}</h3><span class="text-accent fs-sm">{{user.email}}</span>
+                  </div>
+                </div><a class="btn btn-primary d-lg-none mb-2 mt-3 mt-md-0" href="#account-menu" data-bs-toggle="collapse" aria-expanded="false"><i class="ci-menu me-2"></i>Account menu</a>
+              </div>
+              <div class="bg-secondary px-4 py-3">
+                  <h3 class="fs-sm mb-0 text-muted">Account settings</h3>
+                </div>
+                <ul class="list-unstyled mb-0">
+                  <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3 active" href="#!profile/profile"><i class="ci-user opacity-60 me-2"></i>Thông tin</a></li>
+                  <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" href="#!profile/password"><i class="ci-location opacity-60 me-2"></i>Đổi mật khẩu</a></li>
+                  <li class="mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" href="account-payment.html"><i class="ci-card opacity-60 me-2"></i>Payment methods</a></li>
+                  <li class="d-lg-none border-top mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" href="account-signin.html"><i class="ci-sign-out opacity-60 me-2"></i>Sign out</a></li>
+                </ul>
+              <div class="d-lg-block collapse" id="account-menu">
+                <div class="bg-secondary px-4 py-3">
+                  <h3 class="fs-sm mb-0 text-muted">Dashboard</h3>
+                </div>
+                <ul class="list-unstyled mb-0">
+                  <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" href="#!profile/order"><i class="ci-bag opacity-60 me-2"></i>Đơn mua<span class="fs-sm text-muted ms-auto">1</span></a></li>
+                  <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" href="account-wishlist.html"><i class="ci-heart opacity-60 me-2"></i>Wishlist<span class="fs-sm text-muted ms-auto">3</span></a></li>
+                  <li class="mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" href="account-tickets.html"><i class="ci-help opacity-60 me-2"></i>Support tickets<span class="fs-sm text-muted ms-auto">1</span></a></li>
+                </ul>
+                
+              </div>
+            </div>
+          </aside>
+          <!-- Content  -->
+         
+             <section class="col-lg-8">
+           			<ng-view></ng-view>
+ 			 </section>
+ 			
+ 			 
+  			 <!-- Toolbar-->
+         			 
+           <!-- End Content  -->
+        </div>
+      </div>
+    </main>
+    <!-- Footer-->
+    <th:block th:include="admin/fragments/footer"></th:block>
+    <!-- Toolbar for handheld devices (Default)-->
+    <div class="handheld-toolbar">
+      <div class="d-table table-layout-fixed w-100"><a class="d-table-cell handheld-toolbar-item" href="account-wishlist.html"><span class="handheld-toolbar-icon"><i class="ci-heart"></i></span><span class="handheld-toolbar-label">Wishlist</span></a><a class="d-table-cell handheld-toolbar-item" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" onclick="window.scrollTo(0, 0)"><span class="handheld-toolbar-icon"><i class="ci-menu"></i></span><span class="handheld-toolbar-label">Menu</span></a><a class="d-table-cell handheld-toolbar-item" href="shop-cart.html"><span class="handheld-toolbar-icon"><i class="ci-cart"></i><span class="badge bg-primary rounded-pill ms-1">4</span></span><span class="handheld-toolbar-label">$265.00</span></a></div>
+    </div>
+    <!-- Back To Top Button--><a class="btn-scroll-top" href="#top" data-scroll><span class="btn-scroll-top-tooltip text-muted fs-sm me-2">Top</span><i class="btn-scroll-top-icon ci-arrow-up">   </i></a>
+    <!-- Vendor scrits: js libraries and plugins-->
+    
+    
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js" integrity="sha512-Zq9o+E00xhhR/7vJ49mxFNJ0KQw1E1TMWkPTxrWcnpfEFDEXgUiwJHIKit93EW/XxE31HSI5GEOW06G6BF1AtA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script th:src="@{/admin/vendor/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/admin/vendor/simplebar/dist/simplebar.min.js}"></script>
+    <script th:src="@{/admin/vendor/tiny-slider/dist/min/tiny-slider.js}"></script>
+    <script th:src="@{/admin/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js}"></script>
+    <script th:src="@{/admin/vendor/prismjs/components/prism-core.min.js}"></script>
+    <script th:src="@{/admin/vendor/prismjs/components/prism-markup.min.js}"></script>
+    <script th:src="@{/admin/vendor/prismjs/components/prism-clike.min.js}"></script>
+    <script th:src="@{/admin/vendor/prismjs/components/prism-javascript.min.js}"></script>
+    <script th:src="@{/admin/vendor/prismjs/components/prism-pug.min.js}"></script>
+    <script th:src="@{/admin/vendor/prismjs/plugins/toolbar/prism-toolbar.min.js}"></script>
+    <script th:src="@{/admin/vendor/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js}"></script>
+    <script th:src="@{/admin/vendor/prismjs/plugins/line-numbers/prism-line-numbers.min.js}"></script>
+    
+	<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js}"></script>
+    <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js}"></script>
+    <script th:src="@{https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.11.4/b-2.2.2/b-html5-2.2.2/b-print-2.2.2/r-2.2.9/datatables.min.js}"></script>
+    <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js}"></script>
+	<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/angular-route/1.8.2/angular-route.min.js}"></script>
+	<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/angular-datatables/0.4.3/angular-datatables.min.js}"></script>
+    
+   
+    
+    <script th:src="@{/admin/js/theme.min.js}"></script>
+    <script th:src="@{/admin/script.js}"></script>
+ 
+  </body>
+</html>

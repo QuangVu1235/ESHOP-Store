@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<!-- Meta Tag -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name='copyright' content=''>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Title Tag  -->
+<title>Fshop</title>
+<!-- Favicon -->
+<link rel="icon" type="image/png" th:href="@{/user/images/favicon.png}">
+<!-- Web Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+
+<!-- StyleSheet -->
+
+<!-- Bootstrap -->
+<link rel="stylesheet" th:href="@{/user/css/bootstrap.css}">
+<!-- Magnific Popup -->
+<link rel="stylesheet" th:href="@{/user/css/magnific-popup.min.css}">
+<!-- Font Awesome -->
+<link rel="stylesheet" th:href="@{/user/css/font-awesome.css}">
+<!-- Fancybox -->
+<link rel="stylesheet" th:href="@{/user/css/jquery.fancybox.min.css}">
+<!-- Themify Icons -->
+<link rel="stylesheet" th:href="@{/user/css/themify-icons.css}">
+<!-- Nice Select CSS -->
+<link rel="stylesheet" th:href="@{/user/css/niceselect.css}">
+<!-- Animate CSS -->
+<link rel="stylesheet" th:href="@{/user/css/animate.css}">
+<!-- Flex Slider CSS -->
+<link rel="stylesheet" th:href="@{/user/css/flex-slider.min.css}">
+<!-- Owl Carousel -->
+<link rel="stylesheet" th:href="@{/user/css/owl-carousel.css}">
+<!-- Slicknav -->
+<link rel="stylesheet" th:href="@{/user/css/slicknav.min.css}">
+
+<!-- Eshop StyleSheet -->
+<link rel="stylesheet" th:href="@{/user/css/reset.css}">
+<link rel="stylesheet" th:href="@{/user/style.css}">
+<link rel="stylesheet" th:href="@{/user/css/responsive.css}">
+
+
+
+<!-- Color CSS -->
+<link rel="stylesheet" th:href="@{/user/css/color/color2.css}">
+<!--<link rel="stylesheet" href="css/color/color2.css">-->
+<!--<link rel="stylesheet" href="css/color/color3.css">-->
+<!--<link rel="stylesheet" href="css/color/color4.css">-->
+<!--<link rel="stylesheet" href="css/color/color5.css">-->
+<!--<link rel="stylesheet" href="css/color/color6.css">-->
+<!--<link rel="stylesheet" href="css/color/color7.css">-->
+<!--<link rel="stylesheet" href="css/color/color8.css">-->
+<!--<link rel="stylesheet" href="css/color/color9.css">-->
+<!--<link rel="stylesheet" href="css/color/color10.css">-->
+<!--<link rel="stylesheet" href="css/color/color11.css">-->
+<!--<link rel="stylesheet" href="css/color/color12.css">-->
+
+<link rel="stylesheet" href="#" id="colors">
+
+</head>
+<body class="js">
+
+	<!-- Preloader -->
+
+	<!-- End Preloader -->
+
+	<!-- Eshop Color Plate -->
+	<div class="color-plate ">
+		<a class="color-plate-icon"><i class="ti-paint-bucket"></i></a>
+		<h4>Eshop Colors</h4>
+		<p>Here is some awesome color's available on Eshop Template.</p>
+		<span class="color1"></span> <span class="color2"></span> <span
+			class="color3"></span> <span class="color4"></span> <span
+			class="color5"></span> <span class="color6"></span> <span
+			class="color7"></span> <span class="color8"></span> <span
+			class="color9"></span> <span class="color10"></span> <span
+			class="color11"></span> <span class="color12"></span>
+	</div>
+	<!-- /End Color Plate -->
+
+	<!-- Header -->
+
+	<th:block th:include="user/fragments/header"></th:block>
+			<!-- Shop Single -->
+		
+	 <div class="breadcrumbs">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="bread-inner">
+                        <ul class="bread-list">
+                            <li><a href="index1.html">Home<i class="ti-arrow-right"></i></a></li>
+                            <li class="active"><a href="blog-single.html">Cart</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Breadcrumbs -->
+
+    <!-- Shopping Cart -->
+    <div class="shopping-cart section">
+        <div class="container">
+            <div class="row" th:if="${session.currentCart}">
+                <div class="col-12">
+                    <!-- Shopping Summery -->
+                    <table class="table shopping-summery">
+                        <thead>
+                            <tr class="main-hading">
+                                <th>PRODUCT</th>
+                                <th>NAME</th>
+                                <th class="text-center">UNIT PRICE</th>
+                                <th class="text-center">QUANTITY</th>
+                                <th class="text-center">TOTAL</th>
+                                <th class="text-center"><i class="ti-trash remove-icon"></i></th>
+                            </tr>
+                        </thead>
+                        <tbody id="cartFragment">
+                            <tr th:each="detail, index : ${session.currentCart.listDetail}">
+                                <td class="image" data-title="No"><img th:src="@{'/user/images/products/'+${detail.value.imgUrl}}" alt="#"></td>
+                                <td class="product-des" data-title="Description">
+                                    <p class="product-name"><a th:href="@{'/product/single/'+${detail.value.productId}}" th:text="${detail.value.name}"></a></p>
+                                    
+                                </td>
+                                <td class="price" data-title="Price"><span th:text="${#numbers.formatCurrency(detail.value.price)}"></span></td>
+                                <td class="qty" data-title="Qty">
+                                    <!-- Input Order -->
+                                    <div class="input-group">
+                                        <div class="button minus">
+                                            <button type="button" class="btn btn-primary btn-number" 
+                                                > 
+                                                <i class="ti-minus"></i>
+                                            </button>
+                                        </div>
+                                        <input type="text" class="input-number" data-min="1"
+                                            data-max="100" th:value="${detail.value.quantity}" th:id="quantity + ${detail.key}" >
+                                        <div class="button plus">
+                                            <button  class="btn btn-primary btn-number"
+                                                >
+                                                <i class="ti-plus" th:id="quantity + ${detail.key}" th:attr="onclick='updateProduct(\'' + ${detail.key} + '\')'"></i>
+                                            </button>
+                                          
+                                        </div>
+                                    </div>
+                         
+                                    <!--/ End Input Order -->
+                                </td>
+                                <td class="total-amount" data-title="Total"><span th:text="${#numbers.formatCurrency(detail.value.price * detail.value.quantity)}"></span></td>
+                                <td class="action" data-title="Remove"><a ><i
+                                            class="ti-trash remove-icon" th:attr="onclick='removeProduct(\'' + ${detail.value.productId} + '\')'"></i></a></td>
+                            </tr>
+                           
+                        </tbody>
+                    </table>
+                    <!--/ End Shopping Summery -->
+                </div>
+            </div>
+           		<!-- Start Checkout -->
+		<section class="shop checkout section">
+			<div class="container">
+				<div class="row"> 
+					<div class="col-lg-8 col-12">
+						<div class="checkout-form">
+							<h2>Thanh toán của bạn ở đây</h2>
+							<p>Vui lòng đăng nhập để thanh toán</p>
+							<!-- Form -->
+							<form class="form" method="post" action="#">
+								<div class="row">
+									<div class="col-lg-6 col-md-6 col-12">
+										<div class="form-group">
+											<label>Họ<span>*</span></label>
+											<input type="text" name="name" placeholder="" required="required">
+										</div>
+									</div>
+									<div class="col-lg-6 col-md-6 col-12">
+										<div class="form-group">
+											<label>Tên<span>*</span></label>
+											<input type="text" name="name" placeholder="" required="required">
+										</div>
+									</div>
+								
+									<div class="col-lg-6 col-md-6 col-12">
+										<div class="form-group">
+											<label>Số điện thoại<span>*</span></label>
+											<input id="number" type="number" name="number" placeholder="" required="required">
+										</div>
+									</div>
+									
+							
+									<div class="col-lg-6 col-md-6 col-12">
+										<div class="form-group">
+											<label>Địa chỉ<span>*</span></label>
+											<input id="address" type="text" name="address" placeholder="" required="required">
+										</div>
+									</div>
+									
+						
+									<div class="col-12">
+										<div class="form-group create-account">
+											<input id="cbox" type="checkbox">
+											<label>Create an account?</label>
+										</div>
+									</div>
+								</div>
+							</form>
+							<input type="submit" value="Checkout" 
+                                     	  		name="proceed" class="checkout-button button alt wc-forward"
+                                     	  		th:attr="onclick='checkout()'"/>
+							<!--/ End Form -->
+						</div>
+					</div>
+					<div class="col-lg-4 col-12">
+						<div class="order-details">
+							<!-- Order Widget -->
+							<div class="single-widget">
+								<h2>CART  TOTALS</h2>
+								<div class="content">
+									<ul>
+										<li>Sub Total<span>$330.00</span></li>
+										<li>(+) Shipping<span>$10.00</span></li>
+										<li class="last">Total<span>$340.00</span></li>
+									</ul>
+								</div>
+							</div>
+							<!--/ End Order Widget -->
+							<!-- Order Widget -->
+                            <style> 
+                                input:checked {
+                                  height: none;
+                                  width: none;
+                                }
+                                </style>
+							<div class="single-widget">
+								<h2>Payments</h2>
+								<div class="content">
+									<div class="checkbox">
+										<label class="checkbox-inline" for="1"><input name="updates" id="1" type="checkbox"> Check Payments</label>
+										<label class="checkbox-inline" for="2"><input name="news" id="2" type="checkbox"> Cash On Delivery</label>
+										<label class="checkbox-inline" for="3"><input name="news" id="3" type="checkbox"> PayPal</label>
+									</div>
+								</div>
+							</div>
+							<!--/ End Order Widget -->
+							<!-- Payment Method Widget -->
+							<div class="single-widget payement">
+								<div class="content">
+									<img src="images/payment-method.png" alt="#">
+								</div>
+							</div>
+							<!--/ End Payment Method Widget -->
+							<!-- Button Widget -->
+							<div class="single-widget get-button">
+								<div class="content">
+									<div class="button">
+										<a href="#" class="btn">proceed to checkout</a>
+									</div>
+								</div>
+							</div>
+							<!--/ End Button Widget -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!--/ End Checkout -->
+		
+		<!-- Start Shop Services Area  -->
+		<section class="shop-services section home">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-3 col-md-6 col-12">
+						<!-- Start Single Service -->
+						<div class="single-service">
+							<i class="ti-rocket"></i>
+							<h4>Free shiping</h4>
+							<p>Orders over $100</p>
+						</div>
+						<!-- End Single Service -->
+					</div>
+					<div class="col-lg-3 col-md-6 col-12">
+						<!-- Start Single Service -->
+						<div class="single-service">
+							<i class="ti-reload"></i>
+							<h4>Free Return</h4>
+							<p>Within 30 days returns</p>
+						</div>
+						<!-- End Single Service -->
+					</div>
+					<div class="col-lg-3 col-md-6 col-12">
+						<!-- Start Single Service -->
+						<div class="single-service">
+							<i class="ti-lock"></i>
+							<h4>Sucure Payment</h4>
+							<p>100% secure payment</p>
+						</div>
+						<!-- End Single Service -->
+					</div>
+					<div class="col-lg-3 col-md-6 col-12">
+						<!-- Start Single Service -->
+						<div class="single-service">
+							<i class="ti-tag"></i>
+							<h4>Best Peice</h4>
+							<p>Guaranteed price</p>
+						</div>
+						<!-- End Single Service -->
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- End Shop Services -->
+        </div>
+    </div>
+        <!--/ End Shopping Cart -->
+
+        <!-- Start Shop Services Area  -->
+        <section class="shop-services section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-12">
+                        <!-- Start Single Service -->
+                        <div class="single-service">
+                            <i class="ti-rocket"></i>
+                            <h4>Free shiping</h4>
+                            <p>Orders over $100</p>
+                        </div>
+                        <!-- End Single Service -->
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-12">
+                        <!-- Start Single Service -->
+                        <div class="single-service">
+                            <i class="ti-reload"></i>
+                            <h4>Free Return</h4>
+                            <p>Within 30 days returns</p>
+                        </div>
+                        <!-- End Single Service -->
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-12">
+                        <!-- Start Single Service -->
+                        <div class="single-service">
+                            <i class="ti-lock"></i>
+                            <h4>Sucure Payment</h4>
+                            <p>100% secure payment</p>
+                        </div>
+                        <!-- End Single Service -->
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-12">
+                        <!-- Start Single Service -->
+                        <div class="single-service">
+                            <i class="ti-tag"></i>
+                            <h4>Best Peice</h4>
+                            <p>Guaranteed price</p>
+                        </div>
+                        <!-- End Single Service -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Shop Newsletter -->
+
+        <!-- Start Shop Newsletter  -->
+        <section class="shop-newsletter section">
+            <div class="container">
+                <div class="inner-top">
+                    <div class="row">
+                        <div class="col-lg-8 offset-lg-2 col-12">
+                            <!-- Start Newsletter Inner -->
+                            <div class="inner">
+                                <h4>Newsletter</h4>
+                                <p> Subscribe to our newsletter and get <span>10%</span> off your first purchase</p>
+                                <form action="mail/mail.php" method="get" target="_blank" class="newsletter-inner">
+                                    <input name="EMAIL" placeholder="Your email address" required="" type="email">
+                                    <button class="btn">Subscribe</button>
+                                </form>
+                            </div>
+                            <!-- End Newsletter Inner -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Shop Newsletter -->
+
+
+
+        <!-- Modal -->
+       
+	
+	
+    <!-- Modal end -->
+	<!-- Start Footer Area -->
+	<div th:replace="user/fragments/footer :: footer"></div>
+	<!-- /End Footer Area -->
+
+	<!-- Jquery -->
+	<!-- Latest jQuery form server -->
+	<script src="https://code.jquery.com/jquery.min.js"></script>
+
+	<script th:src="@{/user/js/jquery.min.js}"></script>
+	<script th:src="@{/user/js/jquery-migrate-3.0.0.js}"></script>
+	<script th:src="@{/user/js/jquery-ui.min.js}"></script>
+	<!-- Popper JS -->
+	<script th:src="@{/user/js/popper.min.js}"></script>
+	<!-- Bootstrap JS -->
+	<script th:src="@{/user/js/bootstrap.min.js}"></script>
+	<!-- Color JS -->
+	<script th:src="@{/user/js/colors.js}"></script>
+	<!-- Slicknav JS -->
+	<script th:src="@{/user/js/slicknav.min.js}"></script>
+	<!-- Owl Carousel JS -->
+	<script th:src="@{/user/js/owl-carousel.js}"></script>
+	<!-- Magnific Popup JS -->
+	<script th:src="@{/user/js/magnific-popup.js}"></script>
+	<!-- Fancybox JS -->
+	<script th:src="@{/user/js/facnybox.min.js}"></script>
+	<!-- Waypoints JS -->
+	<script th:src="@{/user/js/waypoints.min.js}"></script>
+	<!-- Countdown JS -->
+	<script th:src="@{/user/js/finalcountdown.min.js}"></script>
+	<!-- Nice Select JS -->
+	<script th:src="@{/user/js/nicesellect.js}"></script>
+	<!-- Ytplayer JS -->
+	<script th:src="@{/user/js/ytplayer.min.js}"></script>
+	<!-- Flex Slider JS -->
+	<script th:src="@{/user/js/flex-slider.js}"></script>
+	<!-- ScrollUp JS -->
+	<script th:src="@{/user/js/scrollup.js}"></script>
+	<!-- Onepage Nav JS -->
+	<script th:src="@{/user/js/onepage-nav.min.js}"></script>
+	<!-- Easing JS -->
+	<script th:src="@{/user/js/easing.js}"></script>
+	<!-- Active JS -->
+	<script th:src="@{/user/js/active.js}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script>
+		function removeProduct(productId) {
+			var url = '/cart/newupdate?productId=' + productId + '&quantity=0&isReplace=true';
+			$.get(url).done(function(fragment) {
+				$('#cartFragment').replaceWith(fragment);
+				callApiRefreshCart();
+			});
+		}
+		
+		function updateProduct(productId) {
+			var url = '/cart/newupdate?productId=' + productId + '&quantity=1&isReplace=false';
+			$.get(url).done(function(fragment) {
+				$('#cartFragment').replaceWith(fragment);
+				callApiRefreshCart();
+			});
+		}
+		
+		function checkout() {
+			var address = $('#address').val();
+			var phone = $('#number').val();
+			var url = '/api/cart/checkout?address=' + address + '&phone=' + phone;
+			$.ajax({
+				url: url,
+				type: 'GET',
+				statusCode: {
+					200: handle200,
+					400: handle400,
+					403: handle403
+				}
+			})
+		}
+		
+		function handle200() {
+			alert('Your payment was created successfully!');
+			window.location.href = '/index';
+		}
+		
+		function handle400() {
+			alert('Checkout failed, try again!');
+		}
+		
+		function handle403() {
+			alert('Please login before checkout');
+			window.location.href = '/login';
+		}
+		
+		function callApiRefreshCart() {
+			$.ajax({
+				url: '/api/cart/refresh',
+				type: 'GET',
+				dataType: 'json',
+				success: function(data) {
+					$('#headerTotalPrice').text(numberWithDot(data.totalPrice));
+					$('#headerTotalQuantity').text(data.totalQuantity);
+				},
+				error: function(error) {
+					alert('Api refresh cart met error!!!');
+				}
+			})
+		}
+		
+		function numberWithDot(x) {
+		    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + ' ₫';
+		}
+	</script>
+ 
+
+</body>
+</html>
