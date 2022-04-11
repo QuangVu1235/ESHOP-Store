@@ -18,11 +18,13 @@ public interface ProductService {
 	
 	Page<Products> findByProductTypeSlug(String slug,Pageable Page);
 	 
-	 List<Products> findByIsDeletedAndQuantityGreaterThan(Boolean isDeleted, Integer quantity, Pageable page);
+	List<Products> findByIsDeletedAndQuantityGreaterThan(Boolean isDeleted, Integer quantity, Pageable page);
 
 	List<Products> findAll();
 
 	Products update(Products product);
 
 	List<Products> findByIsDeletedAndQuantityIsLessThanEqual(Boolean isDeleted, Integer quantity);
+
+	Page<Products> findByNameLike(String name, Pageable pageable);
 }

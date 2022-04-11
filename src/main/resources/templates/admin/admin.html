@@ -30,6 +30,8 @@
   <!-- Google Tag Manager-->
   <link rel="stylesheet" media="screen" th:href="@{/admin/vendor/prismjs/themes/prism.css}" />
   <link rel="stylesheet" media="screen" th:href="@{/admin/vendor/prismjs/plugins/toolbar/prism-toolbar.css}" />
+  <link rel="stylesheet" th:href="@{/admin/vendor/chart.js/Chart.css}">
+  <link rel="stylesheet" th:href="@{/admin/vendor/chart.js/Chart.min.css}">
   <link rel="stylesheet" media="screen"
     th:href="@{/admin/vendor/prismjs/plugins/line-numbers/prism-line-numbers.css}" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.css"
@@ -99,6 +101,9 @@
               <h3 class="fs-sm mb-0 text-muted">Dashboard</h3>
             </div>
             <ul class="list-unstyled mb-0">
+           	 <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3"
+                  href="#!admin/stas"><i class="ci-bag opacity-60 me-2"></i>Thống kê<span
+                    class="fs-sm text-muted ms-auto">1</span></a></li>
               <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3"
                   href="#!admin/order"><i class="ci-bag opacity-60 me-2"></i>Đơn mua<span
                     class="fs-sm text-muted ms-auto">1</span></a></li>
@@ -120,9 +125,9 @@
                     href="#!admin/profile"><i class="ci-user opacity-60 me-2"></i>Thông tin</a></li>
                 <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3"
                     href="#!admin/password"><i class="ci-location opacity-60 me-2"></i>Đổi mật khẩu</a></li>
-                <li class="mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3"
-                    href="account-payment.html"><i class="ci-card opacity-60 me-2"></i>Payment methods</a></li>
-                <li class="d-lg-none border-top mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3"
+                <li th:if="${session.role == '[DIRE]'}" class="mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3"
+                    href="#!admin/auth"><i class="ci-card opacity-60 me-2"></i>Vai Trò</a></li>
+                <li  class="d-lg-none border-top mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3"
                     href="account-signin.html"><i class="ci-sign-out opacity-60 me-2"></i>Sign out</a></li>
               </ul>
 
@@ -176,6 +181,11 @@
   <script th:src="@{/admin/vendor/prismjs/plugins/toolbar/prism-toolbar.min.js}"></script>
   <script th:src="@{/admin/vendor/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js}"></script>
   <script th:src="@{/admin/vendor/prismjs/plugins/line-numbers/prism-line-numbers.min.js}"></script>
+  
+  <script th:src="@{/admin/vendor/chart.js/Chart.min.js}"></script>
+   <script th:src="@{/admin/vendor/chart.js/Chart.js}"></script>
+    <script th:src="@{/admin/vendor/chart.js/Chart.bundle.js}"></script>
+    <script th:src="@{/admin/vendor/chart.js/Chart.bundle.min.js}"></script>
   
   <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js}"></script>
     <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js}"></script>

@@ -18,7 +18,7 @@ import com.project.entity.Products;
 import com.project.service.ProductService;
 
 @Controller
-@RequestMapping("/product")
+@RequestMapping("/product/")
 public class ProductController {
 	
 	@Autowired
@@ -40,6 +40,14 @@ public class ProductController {
 		Page<Products> products = productService.findByProductTypeSlug(slug,pageable);
 		model.addAttribute("products",products);
 		model.addAttribute("slug",slug);
+		return "user/shop-list";
+	}
+	
+	@GetMapping("/search")
+	public String getSearch(Model model, @RequestParam("name") String name, @RequestParam("p") Optional<Integer> p) {
+		Pageable pageable = PageRequest.of(p.orElse(0), 6);
+		Page<Products> products = productService.findByNameLike(name,pageable);
+		model.addAttribute("products",products);
 		return "user/shop-list";
 	}
 

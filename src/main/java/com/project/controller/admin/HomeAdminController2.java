@@ -57,5 +57,15 @@ public class HomeAdminController2 {
 	public String getUser() {
 		return "admin/pages/usermanager";
 	}
+	
+	@GetMapping("auth")
+	public String getAuth() {
+		return "admin/pages/auth";
+	}
+	
+	@GetMapping("stas")
+	public String getStas() {
+		return "admin/pages/stas";
+	}
 
 }

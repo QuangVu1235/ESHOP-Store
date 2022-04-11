@@ -6,4 +6,8 @@ import com.project.entity.Authorities;
 
 public interface AuthoritiesService {
 	List<Authorities> getRoleByUserId(Long userId);
+
+	List<Authorities> findAll();
+
+	void updateRoles(Long userId, Long roleId);
 }

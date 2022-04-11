@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.entity.Authorities;
 import com.project.entity.OrderDetails;
@@ -94,7 +95,8 @@ public class HomeController {
 	}
 	
 	@PostMapping("register")
-	public String doPostRegister(@ModelAttribute("userRegister") Users userRegister, HttpSession session) {
+	public String doPostRegister(@ModelAttribute("userRegister") Users userRegister, HttpSession session,
+			RedirectAttributes redirectAttribute) {
 		System.out.println(userRegister);
 		try {
 			Users userResponse = usersService.save(userRegister);
@@ -112,7 +114,9 @@ public class HomeController {
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
-			return null; 
+			e.printStackTrace();
+			redirectAttribute.addFlashAttribute("error", "User is not valid");
+			return "redirect:/register"; 
 		}
 		
 		

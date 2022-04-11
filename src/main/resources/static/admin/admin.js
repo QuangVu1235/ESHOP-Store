@@ -56,15 +56,76 @@ app.config(function($routeProvider) {
 			templateUrl: "user",
 			controller: "userCtrl"
 		})
-		.otherwise({ redirectTo: "/admin/product" });
+		.when("/admin/auth", {
+			templateUrl: "auth",
+			controller: "authCtrl"
+		})
+		.when("/admin/stas", {
+			templateUrl: "stas",
+			controller: "stasCtrl"
+		})
+		.otherwise({ redirectTo: "/admin/stas" });
 });
 
+app.controller("stasCtrl", function($scope, $rootScope, $http) {
+
+	$scope.getall = function() {
+		$http.get('/api/stas/').then(function(respone) {
+			console.log(respone.data);
+			var totalPriceLast6Months = respone.data;
+			const ctx = document.getElementById('canvasChart').getContext('2d');
+			const myChart = new Chart(ctx, {
+				type: 'line',
+				data: {
+					labels: totalPriceLast6Months[0],
+					datasets: [{
+						label: 'Total revenue last 6 months',
+						data: totalPriceLast6Months[1],
+						backgroundColor: [
+							'rgba(255, 99, 132, 0.2)',
+							'rgba(54, 162, 235, 0.2)',
+							'rgba(255, 206, 86, 0.2)',
+							'rgba(75, 192, 192, 0.2)',
+							'rgba(153, 102, 255, 0.2)',
+							'rgba(255, 159, 64, 0.2)'
+						],
+						borderColor: [
+							'rgba(255, 99, 132, 1)',
+							'rgba(54, 162, 235, 1)',
+							'rgba(255, 206, 86, 1)',
+							'rgba(75, 192, 192, 1)',
+							'rgba(153, 102, 255, 1)',
+							'rgba(255, 159, 64, 1)'
+						],
+						borderWidth: 4
+					}]
+				},
+				options: {
+					responsive: true,
+					maintainAspectRatio: false,
+					scales: {
+						yAxes: [{
+							ticks: {
+								beginAtZero: false,
+								callback: function(value, index, values) {
+									return value.toLocaleString("vi-VN", { style: "currency", currency: "VND" });
+								}
+							}
+						}]
+					}
+				}
+			});
+		})
+	}
+	$scope.getall();
+
+});
 
 app.controller("orderCtrl", function($scope, $rootScope, $http) {
 	$scope.dtOptions = {
-				pageLength: 4,
-   
-			};
+		pageLength: 4,
+
+	};
 	$scope.order = {};
 	$http.get("/api/order/all").then(function(response) {
 		$rootScope.orders = response.data;
@@ -73,7 +134,7 @@ app.controller("orderCtrl", function($scope, $rootScope, $http) {
 	});
 
 	$scope.update = function(item) {
-		
+
 		var id = item.order.id;
 		$http.put("/api/order/update/" + id, item).then(function(response) {
 			iziToast.success({
@@ -177,13 +238,13 @@ app.controller("passwordCtrl", function($scope, $rootScope, $http) {
 
 });
 app.controller("productCtrl", function($scope, $rootScope, $http) {
-		$scope.dtOptions = {
-				pageLength: 4,
-   
-			};
+	$scope.dtOptions = {
+		pageLength: 4,
+
+	};
 	$scope.form = {};
 	$scope.products = {};
-	$('#update').attr('disabled','disabled');
+	$('#update').attr('disabled', 'disabled');
 	$scope.load = function() {
 		$http.get('/api/product/all').then(function(response) {
 
@@ -200,7 +261,7 @@ app.controller("productCtrl", function($scope, $rootScope, $http) {
 		});
 	}
 	$scope.load();
-	$scope.loadall = function(){
+	$scope.loadall = function() {
 		$http.get('/api/product/all').then(function(response) {
 
 			$scope.products = response.data;
@@ -209,14 +270,14 @@ app.controller("productCtrl", function($scope, $rootScope, $http) {
 			$scope.productfalse = response.data;
 		});
 	}
-	
-	$scope.create = function(){
+
+	$scope.create = function() {
 		var e = document.getElementById('select-input').value;
 		var d = document.getElementById('is-delete').value;
 		var item = angular.copy($scope.form);
 		console.log(item);
 		$http.put("/api/product/" + e + '/' + d, item).then(function(response) {
-			
+
 			$scope.loadall();
 			$scope.edit(response.data);
 
@@ -224,9 +285,9 @@ app.controller("productCtrl", function($scope, $rootScope, $http) {
 				title: 'OK',
 				message: 'Cập nhập thông tin thành công',
 			});
-			
+
 		});
-		
+
 	}
 
 	$scope.edit = function(item) {
@@ -244,18 +305,18 @@ app.controller("productCtrl", function($scope, $rootScope, $http) {
 			var isD = 'false';
 		}
 		$('#is-delete').val(isD).change();
-		$('#create').attr('disabled','disabled');
+		$('#create').attr('disabled', 'disabled');
 		$('#update').removeAttr('disabled');
 	};
 
 	$scope.update = function() {
-		
+
 		var e = document.getElementById('select-input').value;
 		var d = document.getElementById('is-delete').value;
 		var item = angular.copy($scope.form);
 		$http.put("/api/product/${item.id}/" + e + '/' + d, item).then(function(response) {
-			
-			
+
+
 			$scope.edit(response.data);
 
 			iziToast.success({
@@ -263,12 +324,12 @@ app.controller("productCtrl", function($scope, $rootScope, $http) {
 				message: 'Cập nhập thông tin thành công',
 			});
 			$scope.loadall();
-		
-		});	
+
+		});
 
 	};
-	
-	$scope.reset = function(){
+
+	$scope.reset = function() {
 		$scope.form = {
 			imgUrl: '',
 			imgUrl1: '',
@@ -276,18 +337,18 @@ app.controller("productCtrl", function($scope, $rootScope, $http) {
 			imgUrl3: ''
 		};
 		$scope.load();
-		$('#update').attr('disabled','disabled');
+		$('#update').attr('disabled', 'disabled');
 		$('#create').removeAttr('disabled');
 	}
-	
-	$scope.remove = function(item){
-		$http.put('/api/product/remove/${item.id}',item).then(function(response){
+
+	$scope.remove = function(item) {
+		$http.put('/api/product/remove/${item.id}', item).then(function(response) {
 			iziToast.success({
 				title: 'OK',
 				message: 'Cập nhập thông tin thành công',
 			});
 			$scope.loadall();
-		}).catch(error =>{
+		}).catch(error => {
 			console.log(error);
 		})
 	}
@@ -355,33 +416,63 @@ app.controller("productCtrl", function($scope, $rootScope, $http) {
 	}
 });
 app.controller("userCtrl", function($scope, $rootScope, $http) {
-		
-	$scope.json = function(){
-		$http.get('/api/currentuser/all').then(function(respone){
+
+	$scope.json = function() {
+		$http.get('/api/currentuser/all').then(function(respone) {
 			$scope.users = respone.data;
 			console.log(respone.data);
-		}).catch(error =>{
+		}).catch(error => {
 			alert(error);
 		})
 	}
 	$scope.json();
-	
-	$scope.update = function(item,value){
-		
+
+	$scope.update = function(item, value) {
+
 		var isdelete = value;
-	
-		$http.put('/api/currentuser/'+item.id +'/'+ isdelete, item).then(function(data){
+
+		$http.put('/api/currentuser/' + item.id + '/' + isdelete, item).then(function(data) {
 			iziToast.success({
 				title: 'OK',
 				message: 'Cập nhập tài khoản thành công',
 			});
 			$scope.json();
-		}).catch(error =>{
+		}).catch(error => {
 			iziToast.error({
-					title: 'Lỗi!!',
-					message: 'Illegal operation' + error,
+				title: 'Lỗi!!',
+				message: 'Illegal operation' + error,
 			});
 		})
 	}
-		
+
+});
+
+app.controller("authCtrl", function($scope, $rootScope, $http) {
+
+	$scope.json = function() {
+		$http.get('/api/user/auth').then(function(respone) {
+			$scope.auths = respone.data;
+		}).catch(error => {
+			alert(error);
+		})
+	}
+	$scope.json();
+
+	$scope.update = function(auth, rolesid) {
+
+
+		$http.put('/api/user/role/' + auth.user.id + '/' + rolesid, auth).then(function(data) {
+			iziToast.success({
+				title: 'OK',
+				message: 'Cập nhập tài khoản thành công',
+			});
+			$scope.json();
+		}).catch(error => {
+			iziToast.error({
+				title: 'Lỗi!!',
+				message: 'Illegal operation' + error,
+			});
+		})
+	}
+
 });

@@ -109,8 +109,20 @@
 		<!-- Shop Login -->
 		<section class="shop login section">
 			<div class="container">
-				<div class="row"> 
+				<div class="row">
 					<div class="col-lg-6 offset-lg-3 col-12">
+							<div id="divThongBao">
+						    	<div id="thongBao" style="display: none;" role="alert" align="center">
+									<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+									<span id="errorMessage" th:text="${error}"></span>
+									<span id="succeedMessage" th:text="${succeed}"></span>
+								</div>
+						    </div>
+					</div>
+					<div class="col-lg-6 offset-lg-3 col-12">
+					
 						<div class="login-form">
 							<h2>Register</h2>
 							<p>Please register in order to checkout more quickly</p>
@@ -208,7 +220,22 @@
 	<script th:src="@{/user/js/easing.js}"></script>
 	<!-- Active JS -->
 	<script th:src="@{/user/js/active.js}"></script>
-
+	<script >
+		$(document).ready(function(){
+			var errorMessage = $('#errorMessage').text();
+			var succeedMessage = $('#succeedMessage').text();
+			
+			if (errorMessage.length > 0) {
+				$('#thongBao').addClass("alert alert-danger");
+				$('#thongBao').css('display', 'block');
+			} 
+			
+			if (succeedMessage.length > 0) {
+				$('#thongBao').addClass("alert alert-success");
+				$('#thongBao').css('display', 'block');
+			}
+		});
+	</script>
 
 </body>
 </html>

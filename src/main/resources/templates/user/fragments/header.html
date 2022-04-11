@@ -51,12 +51,12 @@
 						<!--/ End Logo -->
 						<!-- Search Form -->
 						<div class="search-top">
-							<div class="top-search"><a href="#0"><i class="ti-search"></i></a></div>
+							
 							<!-- Search Form -->
 							<div class="search-top">
-								<form class="search-form">
-									<input type="text" placeholder="Search here..." name="search">
-									<button value="search" type="submit"><i class="ti-search"></i></button>
+								<form class="search-form" method="GET" th:action="@{/product/search}">
+									<input type="text" placeholder="Search here..." name="name">
+									<button type="submit"><i class="ti-search"></i></button>
 								</form>
 							</div>
 							<!--/ End Search Form -->
@@ -73,8 +73,8 @@
 									<option>mobile</option>
 									<option>kidâ€™s item</option>
 								</select>
-								<form>
-									<input name="search" placeholder="Tìm sản phẩm" type="search">
+								<form method="GET" th:action="@{/product/search}">
+									<input name="name" placeholder="Tìm sản phẩm" type="text">
 									<button class="btnn"><i class="ti-search"></i></button>
 								</form>
 							</div>

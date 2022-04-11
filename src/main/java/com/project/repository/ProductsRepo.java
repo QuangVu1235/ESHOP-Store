@@ -17,6 +17,7 @@ public interface ProductsRepo extends JpaRepository<Products, Long> {
     List<Products> findByIsDeletedOrQuantityIsLessThanEqual(Boolean isDeleted, Integer quantity);
     List<Products> findByIsDeletedAndQuantityGreaterThan(Boolean isDeleted, Integer quantity);
     Page<Products> findByProductTypeSlug(String slug,Pageable Page);
+    Page<Products> findByNameIsLike(String name,Pageable Page);
     List<Products> findByIsDeletedAndQuantityGreaterThan(Boolean isDeleted, Integer quantity, Pageable page);
     
     @Query("select p from Products p where p.productType.id = ?1")
