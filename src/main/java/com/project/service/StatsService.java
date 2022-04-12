@@ -1,5 +1,5 @@
 package com.project.service;
 
 public interface StatsService {
-	String[][] getTotalPriceLast6Months();
+	String[][] getTotalPriceLast6Months(Integer months);
 }

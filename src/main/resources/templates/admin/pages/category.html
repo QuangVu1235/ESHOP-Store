@@ -1,0 +1,119 @@
+<div class="d-flex justify-content-between align-items-center pt-lg-2 pb-4 pb-lg-5 mb-lg-3">
+	<div class="d-flex align-items-center">
+		<label class="d-none d-lg-block fs-sm text-light text-nowrap opacity-75 me-2" for="order-sort">Sort
+			orders:</label>
+		<label class="d-lg-none fs-sm text-nowrap opacity-75 me-2" for="order-sort">Sort orders:</label>
+		<select class="form-select" id="order-sort">
+			<option>All</option>
+			<option>Delivered</option>
+			<option>In Progress</option>
+			<option>Delayed</option>
+			<option>Canceled</option>
+		</select>
+	</div><a class="btn btn-primary btn-sm d-none d-lg-inline-block" href="account-signin.html"><i
+			class="ci-sign-out me-2"></i>Sign out</a>
+</div>
+<!-- Orders list-->
+<div class="tab-pane fade show active" id="result6" role="tabpanel">
+	<ul class="nav nav-pills mb-3" role="tablist">
+		<li class="nav-item"><a class="nav-link active" href="#home1" id="pills-home1" data-bs-toggle="pill" role="tab"
+				aria-controls="home1" aria-selected="true"><i class="ci-bag me-2"></i>Danh mục</a></li>
+		<li class="nav-item"><a class="nav-link" href="#profile1" id="pills-profile1" data-bs-toggle="pill" role="tab"
+				aria-controls="profile1" aria-selected="false"><i class="ci-compare me-2"></i>Ngừng bán</a></li>
+		<li class="nav-item"><a class="nav-link" href="#messages1" id="pills-messages1" data-bs-toggle="pill" role="tab"
+				aria-controls="messages1" aria-selected="false"><i class="ci-check-circle me-2"></i>Cập nhập</a></li>
+	</ul>
+	<div class="tab-content">
+		<div class="tab-pane fade show active" id="home1" role="tabpanel" aria-labelledby="pills-home1">
+			<!-- Basic table -->
+			<table  datatable="ng" dt-options="dtOptions" style="text-align: center" class="table table-bordered border-accent mt-3">
+					<thead>
+						<tr>
+							<th>Tên</th>
+							<th>Slug</th>
+							<th>Trạng thái</th>
+						</tr>
+					</thead>
+					<tbody >
+						<tr ng-repeat="type in types" ng-hide="{{type.isDeleted == true}}">
+							
+				
+							<td>{{type.description}}</td>
+							<td>{{type.slug}}</td>
+							<td>
+								<!-- Secondary solid icon button --> 
+							
+								<button ng-click="edit(type)"  type="button" class="btn btn-secondary btn-icon">
+									<i class="ci-edit"></i>
+								</button>
+								<button ng-click="remove(type)" type="button" class="btn btn-outline-danger btn-icon">
+									<i class="ci-trash"></i>
+								  </button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+		</div>
+		<div class="tab-pane fade" id="profile1" role="tabpanel" aria-labelledby="pills-profile1">
+			<div class="table-responsive">
+				<table style="text-align: center;" class="table table-bordered border-accent">
+					<thead>
+						<tr>
+							<th>Tên</th>
+							<th>Slug</th>
+							<th>Trạng thái</th>
+						</tr>
+					</thead>
+					<tbody >
+						<tr ng-repeat="type in types" ng-hide="{{type.isDeleted == false}}">
+							
+				
+							<td >{{type.description}}</td>
+							<td>{{type.slug}}</td>
+							<td>
+								<!-- Secondary solid icon button --> 
+							
+								<button ng-click="edit(type)"  type="button" class="btn btn-secondary btn-icon">
+									<i class="ci-edit"></i>
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="tab-pane fade" id="messages1" role="tabpanel" aria-labelledby="pills-messages1">
+			  <form method="POST">     
+              <div class="row gx-4 gy-3">
+                <div class="col-sm-12">
+                  <label class="form-label" for="account-fn">Tên danh mục</label>
+                  <input class="form-control" ng-model="form.description" type="text" id="account-fn">
+                </div>
+                <div class="col-sm-6">
+                  <label class="form-label" for="account-email">Slug</label>
+                  <input class="form-control" type="text" ng-model="form.slug" id="account-email">
+                </div>
+                <div class="col-sm-6">
+                 <label class="form-label" for="account-email">Trạng thái</label>
+                  	<select class="form-select m" id="is-delete">
+                 
+				    <option  value=false >Đang bán</option>
+				   	<option  value=true>Ngừng bán</option>
+				  </select>
+                </div>
+                <div class="col-12">
+                  <hr class="mt-2 mb-3 mr-3">
+                  <div class="d-flex flex-row-reverse bd-highlight mr-3">
+                    <button ng-click="reset()" type="button" class="btn btn-warning btn-shadow">Làm mới</button>
+                    <button id="update" ng-click="update()" class="btn btn-primary mt-3 mt-sm-0" type="button">Cập nhập</button>
+                    <button id="create" ng-click="create()" class="btn btn-primary mt-3 mt-sm-0" type="button">Thêm mới</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+		</div>
+
+
+	</div>
+</div>

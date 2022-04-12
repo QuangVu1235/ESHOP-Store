@@ -8,4 +8,6 @@ public interface ProductTypesService {
 	
 	List<ProductTypes> findAll();
 
+	ProductTypes update(ProductTypes types);
+
 }

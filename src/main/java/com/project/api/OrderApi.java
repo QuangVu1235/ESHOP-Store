@@ -1,6 +1,5 @@
 package com.project.api;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -12,18 +11,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.entity.OrderDetails;
-import com.project.entity.Orders;
 import com.project.entity.Users;
 import com.project.repository.OrderDetailsRepo;
 import com.project.repository.OrdersRepo;
-import com.project.service.OrderDetailService;
 import com.project.service.OrderService;
 import com.project.service.UsersService;
 
@@ -39,9 +34,6 @@ public class OrderApi {
 	
 	@Autowired 
 	private OrderService OrderService;
-	
-	@Autowired
-	private OrderDetailService detailService;
 	
 	@Autowired
 	private OrdersRepo ordersRepo;

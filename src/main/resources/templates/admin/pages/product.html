@@ -32,6 +32,7 @@
 							<th>Hình ảnh</th>
 							<th>Tên</th>
 							<th>Giá bán</th>
+							<th>Loai</th>
 							<th>Trạng thái</th>
 						</tr>
 					</thead>
@@ -51,6 +52,8 @@
 							</td>
 							<td style="width: 150px">{{product.name}}</td>
 							<td>{{product.price | currency:''}}đ</td>
+							<td>{{product.productType.slug}}</td>
+							
 							<td>
 								<!-- Secondary solid icon button --> 
 							

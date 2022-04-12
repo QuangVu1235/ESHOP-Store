@@ -64,13 +64,102 @@ app.config(function($routeProvider) {
 			templateUrl: "stas",
 			controller: "stasCtrl"
 		})
+		.when("/admin/category", {
+			templateUrl: "category",
+			controller: "categoryCtrl"
+		})
 		.otherwise({ redirectTo: "/admin/stas" });
 });
+app.controller("categoryCtrl", function($scope, $rootScope, $http) {
+	
+	$scope.dtOptions = {
+		pageLength: 4,
 
+	};
+	$scope.form = {};
+	$scope.products = {};
+	$('#update').attr('disabled', 'disabled');
+	$scope.load = function() {
+		$http.get('/api/type/all').then(function(response) {
+			$scope.types = response.data;
+		});
+	}
+	$scope.load();
+	
+	$scope.create = function() {
+		var d = document.getElementById('is-delete').value;
+		var item = angular.copy($scope.form);
+		console.log(item);
+		$http.put("/api/category/"+ d, item).then(function(response) {
+
+			$scope.load();
+			$scope.edit(response.data);
+
+			iziToast.success({
+				title: 'OK',
+				message: 'Cập nhập thông tin thành công',
+			});
+
+		});
+
+	}
+
+	$scope.edit = function(item) {
+		console.log(item);
+		$scope.form = angular.copy(item);
+
+		document.getElementById("pills-messages1").click();
+		if ($scope.form.isDeleted == true) {
+			var isD = 'true';
+		} else {
+			var isD = 'false';
+		}
+		$('#is-delete').val(isD).change();
+		$('#create').attr('disabled', 'disabled');
+		$('#update').removeAttr('disabled');
+	};
+
+	$scope.update = function() {
+		var d = document.getElementById('is-delete').value;
+		var item = angular.copy($scope.form);
+		$http.put("/api/category/${item.id}/"+ d, item).then(function(response) {
+			$scope.edit(response.data);
+			iziToast.success({
+				title: 'OK',
+				message: 'Cập nhập thông tin thành công',
+			});
+			$scope.load();
+
+		});
+
+	};
+
+	$scope.reset = function() {
+		$scope.form={};
+		$('#update').attr('disabled', 'disabled');
+		$('#create').removeAttr('disabled');
+	}
+
+	$scope.remove = function(item) {
+		console.log(item);
+		$http.put('/api/category/remove/${item.id}', item).then(function(response) {
+			iziToast.success({
+				title: 'OK',
+				message: 'Cập nhập thông tin thành công',
+			});
+			$scope.load();
+		}).catch(error => {
+			console.log(error);
+		})
+	}
+	
+
+});
 app.controller("stasCtrl", function($scope, $rootScope, $http) {
-
+	
 	$scope.getall = function() {
-		$http.get('/api/stas/').then(function(respone) {
+		var e = document.getElementById('select-input').value;  
+		$http.get('/api/stas/'+e).then(function(respone) {
 			console.log(respone.data);
 			var totalPriceLast6Months = respone.data;
 			const ctx = document.getElementById('canvasChart').getContext('2d');
@@ -79,7 +168,7 @@ app.controller("stasCtrl", function($scope, $rootScope, $http) {
 				data: {
 					labels: totalPriceLast6Months[0],
 					datasets: [{
-						label: 'Total revenue last 6 months',
+						label: 'Doanh thu '+ e+ ' Tháng',
 						data: totalPriceLast6Months[1],
 						backgroundColor: [
 							'rgba(255, 99, 132, 0.2)',
@@ -118,6 +207,10 @@ app.controller("stasCtrl", function($scope, $rootScope, $http) {
 		})
 	}
 	$scope.getall();
+	$scope.update = function(){
+		$scope.getall();
+	}
+	
 
 });
 
@@ -187,7 +280,7 @@ app.controller("profileCtrl", function($scope, $rootScope, $http) {
 			tranformRequest: angular.identity,
 			headers: { 'Content-Type': undefined }
 		}).then(respone => {
-			alert(respone.data.name);
+			
 			$scope.form.imgUrl = respone.data.name;
 		}).catch(error => {
 			alert("loi hinh anh");
@@ -249,6 +342,7 @@ app.controller("productCtrl", function($scope, $rootScope, $http) {
 		$http.get('/api/product/all').then(function(response) {
 
 			$scope.products = response.data;
+			console.log(response.data);
 		});
 
 		$http.get('/api/product/isdelete').then(function(response) {
@@ -275,8 +369,8 @@ app.controller("productCtrl", function($scope, $rootScope, $http) {
 		var e = document.getElementById('select-input').value;
 		var d = document.getElementById('is-delete').value;
 		var item = angular.copy($scope.form);
-		console.log(item);
-		$http.put("/api/product/" + e + '/' + d, item).then(function(response) {
+		
+			$http.put("/api/product/" + e + '/' + d, item).then(function(response) {
 
 			$scope.loadall();
 			$scope.edit(response.data);
@@ -286,7 +380,15 @@ app.controller("productCtrl", function($scope, $rootScope, $http) {
 				message: 'Cập nhập thông tin thành công',
 			});
 
+		}).catch(error => {
+			iziToast.error({
+				title: 'Error',
+				message: 'Dữ liệu trống',
+			});
 		});
+		
+		
+		
 
 	}
 
@@ -325,6 +427,11 @@ app.controller("productCtrl", function($scope, $rootScope, $http) {
 			});
 			$scope.loadall();
 
+		}).catch(error => {
+			iziToast.error({
+				title: 'Error',
+				message: 'Cập nhập không thành công' + error,
+			});
 		});
 
 	};
@@ -360,7 +467,7 @@ app.controller("productCtrl", function($scope, $rootScope, $http) {
 			tranformRequest: angular.identity,
 			headers: { 'Content-Type': undefined }
 		}).then(respone => {
-			alert(respone.data.name);
+			
 			$scope.form.imgUrl = respone.data.name;
 		}).catch(error => {
 			alert("loi hinh anh");
@@ -376,7 +483,7 @@ app.controller("productCtrl", function($scope, $rootScope, $http) {
 			tranformRequest: angular.identity,
 			headers: { 'Content-Type': undefined }
 		}).then(respone => {
-			alert(respone.data.name);
+			
 			$scope.form.imgUrl1 = respone.data.name;
 		}).catch(error => {
 			alert("loi hinh anh");
@@ -392,7 +499,7 @@ app.controller("productCtrl", function($scope, $rootScope, $http) {
 			tranformRequest: angular.identity,
 			headers: { 'Content-Type': undefined }
 		}).then(respone => {
-			alert(respone.data.name);
+			
 			$scope.form.imgUrl2 = respone.data.name;
 		}).catch(error => {
 			alert("loi hinh anh");
@@ -407,7 +514,7 @@ app.controller("productCtrl", function($scope, $rootScope, $http) {
 			tranformRequest: angular.identity,
 			headers: { 'Content-Type': undefined }
 		}).then(respone => {
-			alert(respone.data.name);
+			
 			$scope.form.imgUrl3 = respone.data.name;
 		}).catch(error => {
 			alert("loi hinh anh");
@@ -440,7 +547,7 @@ app.controller("userCtrl", function($scope, $rootScope, $http) {
 		}).catch(error => {
 			iziToast.error({
 				title: 'Lỗi!!',
-				message: 'Illegal operation' + error,
+				message: 'Cập nhập không thành công' + error,
 			});
 		})
 	}

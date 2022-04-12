@@ -15,14 +15,14 @@ public class StatsServiceImpl implements StatsService{
 	private OrdersRepo repo;
 
 	@Override
-	public String[][] getTotalPriceLast6Months() {
-		String[][] result = new String[2][6];
+	public String[][] getTotalPriceLast6Months(Integer months) {
+		String[][] result = new String[2][months];
 		YearMonth currentTimes = YearMonth.now();
-		for (int i = 0; i < 6; i++) {
+		for (int i = 0; i < months; i++) {
 			String month = currentTimes.minusMonths((long)i).getMonthValue() + "";
 			String year = currentTimes.minusMonths((long)i).getYear() + "";
-			result[0][5-i] = month + "-" + year;
-			result[1][5-i] = repo.getToTalPricePerMonth(month, year);
+			result[0][(months-1)-i] = month + "-" + year;
+			result[1][(months-1)-i] = repo.getToTalPricePerMonth(month, year);
 		}
  		return result;
 	}

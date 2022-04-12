@@ -1,177 +1,188 @@
-	<header th:fragment="header" class="header shop v3">
-		<!-- Topbar -->
-		<div class="topbar">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-4 col-md-12 col-12">
-						<!-- Top Left -->
-						<div class="top-left">
-							<ul class="list-main">
-								<li><i class="ti-headphone-alt"></i> +060 (800) 801-582</li>
-								<li><i class="ti-email"></i> support@shophub.com</li>
-							</ul>
-						</div>
-						<!--/ End Top Left -->
-					</div>
-					<div class="col-lg-8 col-md-12 col-12">
-						<!-- Top Right -->
-						<div class="right-content">
-							<ul class="list-main">
-								<li><i class="ti-location-pin"></i>FPT Shop</li>
-						
-								<li sec:authorize="isAuthenticated()">
-									<i class="ti-user"></i> <a  sec:authentication="name"></a>
-								</li>
-								<li sec:authorize="isAuthenticated()">
-									<i class="ti-user"></i> <a  sec:authentication="principal.authorities"></a>
-								</li>
-								<li sec:authorize="!isAuthenticated()" >
-									<i class="ti-power-off"></i><a th:href="@{/login}">Login</a> 
 
-								</li>
-								<li sec:authorize="isAuthenticated()">
-									<i class="ti-power-off"></i><a th:href="@{/logoff}">Logout</a>
-								</li>
-							</ul>
-						</div>
-						<!-- End Top Right -->
+<header th:fragment="header" class="header shop v3">
+	<!-- Topbar -->
+	<div class="topbar">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-4 col-md-12 col-12">
+					<!-- Top Left -->
+					<div class="top-left">
+						<ul class="list-main">
+
+							<li><i class="ti-angle-right"></i> <a href="?lang=vi"
+								>VI</a></li>
+							<li><i class="ti-angle-right"></i> <a href="?lang=en"
+								class="single-icon">EN</a></li>
+						</ul>
 					</div>
+					<!--/ End Top Left -->
+				</div>
+				<div class="col-lg-8 col-md-12 col-12">
+					<!-- Top Right -->
+					<div class="right-content">
+						<ul class="list-main">
+							<li><i class="ti-location-pin"></i>FPT Shop</li>
+
+							<li sec:authorize="isAuthenticated()"><i class="ti-user"></i>
+								<a sec:authentication="name"></a></li>
+							<li sec:authorize="isAuthenticated()"><i class="ti-user"></i>
+								<a sec:authentication="principal.authorities"></a></li>
+							<li sec:authorize="!isAuthenticated()"><i
+								class="ti-power-off"></i><a th:href="@{/login}">Login</a></li>
+							<li sec:authorize="isAuthenticated()"><i
+								class="ti-power-off"></i><a th:href="@{/logoff}">Logout</a></li>
+						</ul>
+					</div>
+					<!-- End Top Right -->
 				</div>
 			</div>
 		</div>
-		<!-- End Topbar -->
-		<div class="middle-inner">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-2 col-md-2 col-12">
-						<!-- Logo -->
-						<div class="logo">
-							<a href="index.html"><img th:src="@{/user/images/logo.png}" alt="logo"></a>
-						</div>
-						<!--/ End Logo -->
+	</div>
+	<!-- End Topbar -->
+	<div class="middle-inner">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-2 col-md-2 col-12">
+					<!-- Logo -->
+					<div class="logo">
+						<a href="index.html"><img th:src="@{/user/images/logo.png}"
+							alt="logo"></a>
+					</div>
+					<!--/ End Logo -->
+					<!-- Search Form -->
+					<div class="search-top">
+
 						<!-- Search Form -->
 						<div class="search-top">
-							
-							<!-- Search Form -->
-							<div class="search-top">
-								<form class="search-form" method="GET" th:action="@{/product/search}">
-									<input type="text" placeholder="Search here..." name="name">
-									<button type="submit"><i class="ti-search"></i></button>
-								</form>
-							</div>
-							<!--/ End Search Form -->
+							<form class="search-form" method="GET"
+								th:action="@{/product/search}">
+								<input type="text" placeholder="Search here..." name="name">
+								<button type="submit">
+									<i class="ti-search"></i>
+								</button>
+							</form>
 						</div>
 						<!--/ End Search Form -->
-						<div class="mobile-nav"></div>
 					</div>
-					<div class="col-lg-8 col-md-7 col-12">
-						<div class="search-bar-top">
-							<div class="search-bar">
-								<select>
-									<option selected="selected">Tất cả danh mục</option>
-									<option>watch</option>
-									<option>mobile</option>
-									<option>kidâ€™s item</option>
-								</select>
-								<form method="GET" th:action="@{/product/search}">
-									<input name="name" placeholder="Tìm sản phẩm" type="text">
-									<button class="btnn"><i class="ti-search"></i></button>
-								</form>
-							</div>
+					<!--/ End Search Form -->
+					<div class="mobile-nav"></div>
+				</div>
+				<div class="col-lg-8 col-md-7 col-12">
+					<div class="search-bar-top">
+						<div class="search-bar">
+							<select>
+								<option selected="selected">Tất cả danh mục</option>
+								<option>watch</option>
+								<option>mobile</option>
+								<option>kidâ€™s item</option>
+							</select>
+							<form method="GET" th:action="@{/product/search}">
+								<input name="name" placeholder="Tìm sản phẩm" type="text">
+								<button class="btnn">
+									<i class="ti-search"></i>
+								</button>
+							</form>
 						</div>
 					</div>
-					<div class="col-lg-2 col-md-3 col-12">
-						<div class="right-bar">
-							<!-- Search Form -->
-							<div th:if="${session.role == '[DIRE]'}"  class="sinlge-bar">
-								<a th:href="@{/admin/index}" class="single-icon"><i class="fa fa-bar-chart" aria-hidden="true"></i></a>
-							</div>
-							<div th:if="${session.role == '[STAF]'}"  class="sinlge-bar">
-								<a th:href="@{/admin/index}" class="single-icon"><i class="fa fa-bar-chart" aria-hidden="true"></i></a>
-							</div>
-							<div th:if="${session.role == '[CUST]'}"  class="sinlge-bar">
-								<a th:href="@{/profile/user}" class="single-icon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
-							</div>
-							<div class="sinlge-bar shopping">
-								<a href="#" class="single-icon"><i class="ti-bag"></i> <span class="total-count" id="headerTotalQuantity" th:text="${session.currentCart.totalQuantity}"></span></a>
-								<!-- Shopping Item -->
-								<div class="shopping-item">
-									<div class="dropdown-cart-header">
-										<span>Item</span>
-										<a href="#">View Cart</a>
+				</div>
+				<div class="col-lg-2 col-md-3 col-12">
+					<div class="right-bar">
+						<!-- Search Form -->
+						<div class="sinlge-bar">
+							<a th:href="@{/admin/index}" class="single-icon"><i
+								class="fa fa-bar-chart" aria-hidden="true"></i></a>
+						</div>
+						<div class="sinlge-bar">
+							<a th:href="@{/profile/user}" class="single-icon"><i
+								class="fa fa-user-circle-o" aria-hidden="true"></i></a>
+						</div>
+
+						<div class="sinlge-bar shopping">
+
+							<a href="#" class="single-icon"><i class="ti-bag"></i> <span
+								class="total-count" id="headerTotalQuantity"
+								th:text="${session.currentCart.totalQuantity}"></span></a>
+							<!-- Shopping Item -->
+							<div class="shopping-item">
+								<div class="dropdown-cart-header">
+									<span>Item</span> <a href="#">View Cart</a>
+								</div>
+								<ul class="shopping-list" id="viewCartFragment">
+									<li th:each="detail, index : ${session.currentCart.listDetail}">
+										<a href="#" class="remove" title="Remove this item"><i
+											class="fa fa-remove"></i></a> <a class="cart-img"
+										th:href="@{'/product/single/'+${detail.value.productId}}"><img
+											th:src="@{'/user/images/products/'+${detail.value.imgUrl}}"
+											alt=""></a>
+										<h4>
+											<a href="#" th:text="${detail.value.name}"></a>
+										</h4>
+										<p class="quantity">
+											x<span class="" th:text="${detail.value.quantity}"></span>
+										</p>
+									</li>
+
+								</ul>
+								<div class="bottom">
+
+									<div class="total">
+										<span>Total</span> <span class="total-amount"
+											id="headerTotalPrice"
+											th:text="${#numbers.formatCurrency(session.currentCart.totalPrice)}"></span>
 									</div>
-									<ul class="shopping-list" id="viewCartFragment" >
-										<li  th:each="detail, index : ${session.currentCart.listDetail}">
-											<a href="#" class="remove" title="Remove this item"><i class="fa fa-remove"></i></a>
-											<a class="cart-img" th:href="@{'/product/single/'+${detail.value.productId}}"><img th:src="@{'/user/images/products/'+${detail.value.imgUrl}}" alt=""></a>
-											<h4><a href="#" th:text="${detail.value.name}"></a></h4>
-											<p class="quantity">x<span class="" th:text="${detail.value.quantity}"></span></p>
-										</li>
-										
-									</ul>
-									<div class="bottom">
-									
-										<div class="total">
-											<span>Total</span>
-											<span class="total-amount" id="headerTotalPrice" th:text="${#numbers.formatCurrency(session.currentCart.totalPrice)}"></span>
-										</div>
-										<a th:href="@{/cart}" class="btn animate">Thanh toán</a>
+									<a th:href="@{/cart}" class="btn animate">Thanh toán</a>
+								</div>
+							</div>
+							<!--/ End Shopping Item -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Header Inner -->
+	<div class="header-inner">
+		<div class="container">
+			<div class="cat-nav-head">
+				<div class="row">
+					<div class="col-12">
+						<div class="menu-area">
+							<!-- Main Menu -->
+							<nav class="navbar navbar-expand-lg">
+								<div class="navbar-collapse">
+									<div class="nav-inner">
+										<ul class="nav main-menu menu navbar-nav">
+											<li><a th:href="@{/index}" th:text="#{lo.mn.home}"></a></li>
+											<li class="active"><a href="#" th:text="#{lo.mn.shop}">><i
+													class="ti-angle-down"></i></a>
+												<ul class="dropdown">
+													<li th:each="product :${productstype}"><a
+														th:href="@{'/product/slug?slug='+${product.slug}}"
+														th:text="${product.description}"></a></li>
+
+												</ul></li>
+
+											<li><a href="#">Shop<i class="ti-angle-down"></i><span
+													class="new">New</span></a>
+												<ul class="dropdown">
+													<li><a th:href="@{/product/list}">Shop List</a></li>
+													<li><a th:href="@{/cart}">Cart</a></li>
+													<li><a href="checkout.html">Checkout</a></li>
+												</ul></li>
+
+											<li><a href="#">Blog</a></li>
+											<li><a href="contact.html" th:text="#{lo.mn.about}"></a></li>
+										</ul>
 									</div>
 								</div>
-								<!--/ End Shopping Item -->
-							</div>
+							</nav>
+							<!--/ End Main Menu -->
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<!-- Header Inner -->
-		<div class="header-inner">
-			<div class="container">
-				<div class="cat-nav-head">
-					<div class="row">
-						<div class="col-12">
-							<div class="menu-area">
-								<!-- Main Menu -->
-								<nav class="navbar navbar-expand-lg">
-									<div class="navbar-collapse">	
-										<div class="nav-inner">	
-											<ul class="nav main-menu menu navbar-nav">
-												<li ><a th:href="@{/index}">Trang chủ</a>
-													
-												</li>
-												<li class="active"><a href="#">Danh mục<i class="ti-angle-down"></i></a>
-													<ul class="dropdown" >
-														<li th:each="product :${productstype}">
-															<a th:href="@{'/product/slug?slug='+${product.slug}}" th:text="${product.description}"></a>
-														</li>
-														
-													</ul>
-												</li>												
-												
-												<li><a href="#">Shop<i class="ti-angle-down"></i><span class="new">New</span></a>
-													<ul class="dropdown">
-														<li><a th:href="@{/product/list}">Shop List</a></li>
-														<li><a th:href="@{/cart}">Cart</a></li>
-														<li><a href="checkout.html">Checkout</a></li>
-													</ul>
-												</li>
-																	
-												<li><a href="#">Blog</a>
-													
-												</li>
-												<li><a href="contact.html">Liên hệ với chúng tôi</a></li>
-											</ul>
-										</div>
-									</div>
-								</nav>
-								<!--/ End Main Menu -->	
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!--/ End Header Inner -->
-	</header>
-	<!--/ End Header -->
+	</div>
+	<!--/ End Header Inner -->
+</header>
+<!--/ End Header -->

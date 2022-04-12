@@ -3,24 +3,23 @@ package com.project.controller.admin;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project.constant.SessionConst;
 import com.project.entity.Users;
 import com.project.service.UsersService;
 
 @Controller
+@PreAuthorize("hasAnyRole('ROLE_DIRE','ROLE_STAF')")
 @RequestMapping("admin")
 public class HomeAdminController2 {
 	
 	@Autowired
 	private UsersService usersService;
-	
 	@GetMapping("index")
 	public String getuser(HttpSession session,Authentication authentication) {
 		if(authentication == null) {
@@ -66,6 +65,11 @@ public class HomeAdminController2 {
 	@GetMapping("stas")
 	public String getStas() {
 		return "admin/pages/stas";
+	}
+	
+	@GetMapping("category")
+	public String getCategory() {
+		return "admin/pages/category";
 	}
 
 }

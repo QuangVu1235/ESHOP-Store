@@ -27,4 +27,6 @@ public interface ProductService {
 	List<Products> findByIsDeletedAndQuantityIsLessThanEqual(Boolean isDeleted, Integer quantity);
 
 	Page<Products> findByNameLike(String name, Pageable pageable);
+
+	List<Products> findByIsDeletedAndTypeIdAndQuantityGreaterThan(Boolean isDelete, Long TypeId, Integer quantity);
 }

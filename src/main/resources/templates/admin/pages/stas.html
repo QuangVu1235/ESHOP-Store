@@ -6,7 +6,20 @@
 		class="ci-sign-out me-2"></i>Sign out</a>
 </div>
 <!-- Profile form-->
-<div class="card-body">
-	<canvas id="canvasChart"
+<div class="card mb-4">
+	<div class="card-body">
+	
+		<h3 class="fs-sm pb-3 mb-3 border-bottom">
+			Doanh thu<span class="fw-normal fs-xs text-muted">(Past
+				2 weeks)</span>
+		</h3>
+		 <select class="form-select form-select-sm" id="select-input">
+   			 <option value="3">3 Tháng</option>
+   			 <option value="6">6 Tháng</option>
+    		<option  value="12">12 Tháng</option>
+  		</select>
+  		<button class="btn" ng-click="update()"></button>
+		<canvas id="canvasChart"
 		style="min-height: 350px; height: 350px; max-height: 350px; max-width: 100%;"></canvas>
+	</div>
 </div>

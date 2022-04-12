@@ -458,31 +458,41 @@
 		function checkout() {
 			var address = $('#address').val();
 			var phone = $('#number').val();
-			var url = '/api/cart/checkout?address=' + address + '&phone=' + phone;
-			$.ajax({
-				url: url,
-				type: 'GET',
-				statusCode: {
-					200: handle200,
-					400: handle400,
-					403: handle403
-				}
-			})
-		}
+			if(address == "" && phone==""){
+				alert('Khong bo trong dia chi va so dien thoai');
+			}else if(phone==""){
+				alert('Khong bo trong so dien thoai');
+			}else if (address =="") {
+				alert('Khong bo trong dia chi');
+			}
+			else {
+				var url = '/api/cart/checkout?address=' + address + '&phone=' + phone;
+				$.ajax({
+					url: url,
+					type: 'GET',
+					statusCode: {
+						200: handle200,
+						400: handle400,
+						403: handle403
+					}
+				})
+			}
+			
+			function handle200() {
+				alert('Your payment was created successfully!');
+				window.location.href = '/index';
+			}
+			
+			function handle400() {
+				alert('Checkout failed, try again!');
+			}
+			
+			function handle403() {
+				alert('Please login before checkout');
+				window.location.href = '/login';
+			}
+			}
 		
-		function handle200() {
-			alert('Your payment was created successfully!');
-			window.location.href = '/index';
-		}
-		
-		function handle400() {
-			alert('Checkout failed, try again!');
-		}
-		
-		function handle403() {
-			alert('Please login before checkout');
-			window.location.href = '/login';
-		}
 		
 		function callApiRefreshCart() {
 			$.ajax({

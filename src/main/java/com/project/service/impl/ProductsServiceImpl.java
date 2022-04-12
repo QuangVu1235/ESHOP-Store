@@ -76,4 +76,11 @@ public class ProductsServiceImpl implements ProductService {
 		return productsRepo.findByNameIsLike("%"+name+"%", pageable);
 	}
 
+	@Override
+	public List<Products> findByIsDeletedAndTypeIdAndQuantityGreaterThan(Boolean isDelete, Long TypeId,
+			Integer quantity) {
+		// TODO Auto-generated method stub
+		return productsRepo.findByIsDeletedAndProductTypeIdAndQuantityGreaterThan(isDelete, TypeId, quantity);
+	}
+
 }

@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,9 +18,10 @@ public class StatisticalApi {
 	@Autowired
 	StatsService service;
 	
-	@GetMapping("/")
-	public ResponseEntity<?> getAll(HttpSession session){
-		String[][] chartData = service.getTotalPriceLast6Months();
+	@GetMapping("/{months}")
+	public ResponseEntity<?> getAll(@PathVariable("months") String months,HttpSession session){
+		System.out.println(months);
+		String[][] chartData = service.getTotalPriceLast6Months(Integer.parseInt(months));
 		return ResponseEntity.ok(chartData);
 		
 		 

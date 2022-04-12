@@ -27,9 +27,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private UserDetailsService userDetailsService;
 	
-	@Autowired
-	private AuthoritiesService authoritiesService;
-	
 
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
@@ -54,9 +51,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		//Phan Quyen Su dung
 		http.authorizeHttpRequests()
-			.antMatchers("/cart").authenticated()
-			.antMatchers("/profile/user/**").hasAuthority("CUST")
-			.antMatchers("/admin/admin/**").hasAuthority("DIRE")
+			.antMatchers("/api/currentuser/**","/api/order/**"
+					,"/api/product/**","/api/type/**","/api/stas/","/api/user/**").authenticated()
+			.antMatchers("/profile/user/**","/api/cart/checkout","/cart/**").hasAuthority("CUST")
+			.antMatchers("/admin/index/**").hasAnyAuthority("DIRE","STAF")
 			.anyRequest().permitAll().and()
 			.exceptionHandling().accessDeniedPage("/404");
 	

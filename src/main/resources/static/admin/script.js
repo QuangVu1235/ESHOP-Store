@@ -54,14 +54,13 @@ app.controller("profileCtrl", function($scope, $rootScope, $http) {
 
 		});
 	};
-	$scope.imageChanged = function(files){HomeAdminController.java
+	$scope.imageChanged = function(files){
 		var data = new FormData();
 		data.append('file', files[0]);
 		$http.post('/api/upload/images/${files}', data, {
 			tranformRequest: angular.identity,
 			headers:{'Content-Type': undefined}
 		}).then(respone =>{
-			alert(respone.data.name);
 			$scope.form.imgUrl = respone.data.name;
 		}).catch(error =>{
 			alert("loi hinh anh");

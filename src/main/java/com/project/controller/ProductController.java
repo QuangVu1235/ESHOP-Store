@@ -28,7 +28,8 @@ public class ProductController {
 	@GetMapping("/single/{id}")
 	public String getSingle(Model model,@PathVariable("id") Long id) {
 		Products product = productService.findById(id);
-		List<Products> products = productService.findByTypeId(product.getProductType().getId());
+		List<Products> products = productService.findByIsDeletedAndTypeIdAndQuantityGreaterThan(
+				Boolean.FALSE,product.getProductType().getId(),0);
 		model.addAttribute("product",product);
 		model.addAttribute("products",products);
 		return "user/single";
